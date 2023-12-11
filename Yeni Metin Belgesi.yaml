@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: |
+Description: >
   Kittens Carousel is a static website application deployed with Apache Web Server on AWS Elastic Compute Cloud (EC2) Instance using AWS Cloudformation Service.
 
 Parameters:
@@ -7,14 +7,14 @@ Parameters:
     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
     Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
 Resources:
-  Ekrem:
+  ekrem:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref LatestAmiId
       InstanceType: t2.micro
       KeyName: ekremkey
       SecurityGroups: 
-        !Ref firstscr
+        - !Ref firstscr
       Tags: 
         - Key: Name
           Value: Web Server of StackName
