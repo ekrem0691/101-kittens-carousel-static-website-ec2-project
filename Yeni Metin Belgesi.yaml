@@ -17,8 +17,20 @@ Resources:
         !Ref firstscr
       Tags: 
         - Key: Name
-          Value:  
-      UserData: "String"
+          Value: Web Server of StackName
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y httpd wget
+          sudo systemctl start httpd
+          sudo systemctl enable httpd
+          sudo chmod -R 755 /var/www/html/
+          sudo chown -R apache:apache /var/www/html/
+          sudo wget -O /var/www/html/index.html https://raw.githubusercontent.com/ekrem0691/101-kittens-carousel-static-website-ec2-project/main/static-web/index.html 
+          sudo wget -O /var/www/html/cat0.jpg https://raw.githubusercontent.com/ekrem0691/101-kittens-carousel-static-website-ec2-project/main/static-web/cat0.jpg 
+          sudo wget -O /var/www/html/cat1.jpg https://raw.githubusercontent.com/ekrem0691/101-kittens-carousel-static-website-ec2-project/main/static-web/cat1.jpg 
+          sudo wget -O /var/www/html/cat2.jpg https://raw.githubusercontent.com/ekrem0691/101-kittens-carousel-static-website-ec2-project/main/static-web/cat2.jpg
 
   firstscr:
     Type: AWS::EC2::SecurityGroup
